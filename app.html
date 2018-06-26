@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link href="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.css" rel="stylesheet">
+  <link href="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.2/jquery.mobile-1.4.2.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+  <script src="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.js"></script>
+
+  <script src="script.js"></script>
+  <script type="text/javascript">
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function KW_getVal(o){ //v1.2
+	var retVal="0";if (o.type=="select-one")
+	{retVal=(o.selectedIndex==-1)?0:o.options[o.selectedIndex].value;}
+	else if (o.length>1){for (var i=0;i<o.length;i++) if (o[i].checked) retVal=o[i].value;
+	} else if (o.type=="checkbox") {retVal=(o.checked)?o.value:0;} else {
+	retVal=Number(o.value)}return parseFloat(retVal);
+}
+
+function KW_calcForm() { //v1.2
+	var str="",a=KW_calcForm.arguments; for (var i=3;i<a.length;i++)
+	str+=(a[i].indexOf("#")==-1)?a[i]:KW_getVal(MM_findObj(a[i].substring(1)));
+	t=Math.round(a[1]*eval(str))/a[1];tS=t.toString();if(a[2]>0){tSp=tS.indexOf(".");
+	if(tSp==-1)	tS+=".";tSp=tS.indexOf(".");while(tSp!=(tS.length-1-a[2])){tS+="0";
+	tSp=tS.indexOf(".");}} MM_findObj(a[0]).value=tS;
+}
+  </script>
+</head>
+<body>
+<div data-role="page" data-control-title="Home" id="page1">
+    <div data-theme="" data-role="header">
+        <h1 class="ui-title">
+            Fourm
+        </h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="h">
+                Height (.cm)
+            </label>
+            <input name="h" id="h" placeholder="" value="" type="text">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+          <label for="w">
+                weight (.kg)
+            </label>
+            <input name="w" id="w" placeholder="" value="" type="text">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+          <label for="b">
+                BMI
+            </label>
+            <input name="b" type="text" id="b" placeholder="" onFocus="KW_calcForm('b',100,2,'(','#w','/','(','(','0.01','*','#h',')','*','(','0.01','*','#h',')',')',')')" value="">
+        </div>
+        <a href="#page1" class="ui-btn ">
+            Calculate
+        </a>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <h3 class="ui-title">
+        </h3>
+    </div>
+</div>
+</body>
+</html>
